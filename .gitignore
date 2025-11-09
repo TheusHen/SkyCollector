@@ -21,3 +21,7 @@ Project.toml
 
 # Temporary files
 tmp/
+
+# Logs
+logs/
+*.log

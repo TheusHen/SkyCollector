@@ -7,13 +7,36 @@ import importlib
 import sys
 import logging
 
-# Configure logging
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(levelname)s - %(message)s',
+# Configure logging with both console and file output
+log_dir = "logs"
+os.makedirs(log_dir, exist_ok=True)
+log_file = os.path.join(log_dir, f"collection_{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.log")
+
+# Create formatters
+formatter = logging.Formatter(
+    '%(asctime)s - %(levelname)s - %(message)s',
     datefmt='%Y-%m-%d %H:%M:%S'
 )
+
+# Configure root logger
 logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
+
+# Console handler
+console_handler = logging.StreamHandler(sys.stdout)
+console_handler.setLevel(logging.INFO)
+console_handler.setFormatter(formatter)
+
+# File handler
+file_handler = logging.FileHandler(log_file, encoding='utf-8')
+file_handler.setLevel(logging.DEBUG)
+file_handler.setFormatter(formatter)
+
+# Add handlers to logger
+logger.addHandler(console_handler)
+logger.addHandler(file_handler)
+
+logger.info(f"Logging to file: {log_file}")
 
 # Import scrapers
 from scrapers import barnard_scraper, weatherusa_scraper
@@ -132,7 +155,26 @@ def main():
     logger.info("="*60)
     logger.info(f"Data collection complete")
     logger.info(f"Successful: {successful_collections}, Failed: {failed_collections}")
+    logger.info(f"Log file saved to: {log_file}")
     logger.info("="*60)
+    
+    # Save a summary report
+    summary_dir = "logs"
+    summary_file = os.path.join(summary_dir, "latest_summary.json")
+    summary_data = {
+        "timestamp": datetime.now().isoformat(),
+        "successful_collections": successful_collections,
+        "failed_collections": failed_collections,
+        "total_scrapers": len(SCRAPERS),
+        "log_file": log_file
+    }
+    
+    try:
+        with open(summary_file, "w") as f:
+            json.dump(summary_data, f, indent=2)
+        logger.info(f"Summary saved to: {summary_file}")
+    except Exception as e:
+        logger.error(f"Failed to save summary: {e}")
 
 if __name__ == "__main__":
     main()
