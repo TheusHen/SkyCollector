@@ -12,7 +12,8 @@ function analyze_image(image_path)
     img_gray = Gray.(img)
 
     # Detect blobs (stars)
-    blobs = blob_LoG(img_gray, 0.1, [10])
+    # The function signature was updated in the library. We now use a keyword argument for the threshold.
+    blobs = blob_LoG(img_gray, rthresh=0.1)
 
     # Format the star data
     stars = []
