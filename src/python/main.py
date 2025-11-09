@@ -39,11 +39,28 @@ logger.addHandler(file_handler)
 logger.info(f"Logging to file: {log_file}")
 
 # Import scrapers
-from scrapers import barnard_scraper, weatherusa_scraper
+from scrapers import (
+    barnard_scraper, 
+    weatherusa_scraper,
+    allsky_cameras,
+    university_observatories,
+    weather_skycams,
+    aurora_cameras,
+    meteor_cameras,
+    spaceweather_cameras,
+    misc_skycams
+)
 
 SCRAPERS = [
     barnard_scraper,
-    weatherusa_scraper
+    weatherusa_scraper,
+    allsky_cameras,
+    university_observatories,
+    weather_skycams,
+    aurora_cameras,
+    meteor_cameras,
+    spaceweather_cameras,
+    misc_skycams
 ]
 
 def analyze_image(image_path):
