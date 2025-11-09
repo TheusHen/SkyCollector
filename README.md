@@ -31,76 +31,10 @@ Log files include:
 
 ## Data Sources
 
-The project scrapes images from over **240+ astronomical and sky observation sources** worldwide, organized into the following categories:
+Currently, the project scrapes images from the following sources:
 
-### 1. Original Sources (2 sources)
-- **Barnard Astronomical Society:** A static URL pointing to the latest all-sky camera image.
-- **weatherUSA SkyCam Network:** Scrapes specific camera pages to find the latest image URL.
-
-### 2. All-Sky Observatory Cameras (41 sources)
-Professional observatory all-sky cameras including:
-- Major observatories: ESO (Paranal, La Silla), Gemini North/South, CFHT, Subaru, UKIRT, IRTF
-- International facilities: IAC Tenerife, TUG Turkey, KPNO, Lowell Observatory, McDonald Observatory
-- European observatories: Calar Alto, TNG, NOT, Mercator, Liverpool Telescope, WHT, INT
-- Southern hemisphere: AAO, Siding Spring, SAAO, SALT, SONEAR
-- And many more professional observatories worldwide
-
-### 3. University Observatory Cameras (45 sources)
-University and educational institution observatories including:
-- **USA:** University of Arizona, UC Berkeley, Yale, Caltech, MIT, Chicago, Cornell, Michigan, Texas, Hawaii, Colorado, Penn State, Washington
-- **Europe:** Oxford, Cambridge, Edinburgh, Leiden, Amsterdam, Munich, Heidelberg, Paris, Bologna, Padova, Madrid, Barcelona, Valencia, Warsaw, Prague, Vienna, Stockholm, Oslo, Copenhagen
-- **Asia-Pacific:** University of Tokyo, Kyoto, Beijing, Nanjing, Sydney, Melbourne, ANU
-
-### 4. Weather Station SkyCams (20 sources)
-WeatherUSA SkyCam network cameras across major US cities including:
-- Columbus, Cleveland, Indianapolis, Detroit, Chicago, Pittsburgh, New York, Boston
-- Miami, Houston, Los Angeles, Seattle, Phoenix, Denver, Las Vegas
-- Atlanta, Charlotte, Nashville, St. Louis, Minneapolis
-
-### 5. Aurora and Northern Lights Cameras (35 sources)
-Dedicated aurora observation cameras including:
-- **Alaska:** Fairbanks GI, Poker Flat, Anchorage, Juneau, Nome, Barrow
-- **Canada:** AuroraMAX Yellowknife, Churchill, Gillam, Fort Smith, Edmonton, Calgary, Athabasca
-- **Scandinavia:** Kiruna IRF, Abisko, Tromsø, Longyearbyen, Sodankylä, Kilpisjärvi, Ivalo, Muonio, Levi, Kevo
-- **Iceland:** Reykjavik, Akureyri
-- **Russia:** Murmansk, Apatity
-- **Greenland:** Kangerlussuaq, Qaanaaq
-- **Antarctica:** South Pole, McMurdo, Mawson, Davis (Aurora Australis)
-
-### 6. Meteor Detection Cameras (32 sources)
-Fireball and meteor surveillance cameras including:
-- **Global Meteor Network:** Stations in Croatia, USA, Australia, Canada, UK
-- **NASA All-Sky Fireball Network:** Huntsville, Tullahoma, Dahlonega, Oberlin, Clouds Rest
-- **CAMS (Cameras for Allsky Meteor Surveillance):** Bay Area, BeNeLux, Florida, Texas
-- **IMO Video Network:** Croatia, Germany, France, Italy
-- **UK Meteor Network:** Edinburgh, London, Manchester, Oxford, Bristol
-- **Australia Meteor Network:** Canberra, Sydney, Melbourne, Brisbane, Perth
-- **SonotaCo Network (Japan):** Tokyo, Osaka, Nagoya
-
-### 7. Space Weather and Solar Monitoring Cameras (31 sources)
-Solar observation and space weather monitoring including:
-- **NOAA:** LASCO C2/C3 Coronagraph, SUVI Solar Imager, Aurora forecasts
-- **NASA SDO:** Multiple wavelengths (193Å, 211Å, 304Å, 171Å, 131Å, 335Å, 094Å), HMI Continuum/Magnetogram
-- **SOHO:** EIT multiple wavelengths, MDI Magnetogram
-- **STEREO:** EUVI observations
-- **Hinode:** X-Ray Telescope, Solar Optical Telescope
-- **Ground-based Solar:** NSO GONG H-alpha and Magnetogram, Kanzelhöhe, Big Bear, Catania, Mees Observatory
-- **Atmospheric:** Lidar, Airglow imagers, Noctilucent cloud monitors
-
-### 8. Miscellaneous Sky Cameras (40 sources)
-Additional specialized cameras including:
-- **Dark Sky Preserves:** Cherry Springs, Jasper, Galloway Forest, Brecon Beacons, Exmoor
-- **Radio Astronomy:** Arecibo, Parkes, Jodrell Bank, Effelsberg, VLA, ALMA
-- **Planetariums:** Griffith Observatory, Adler Planetarium, Hayden Planetarium, Franklin Institute
-- **Amateur Astronomy Clubs:** Worldwide locations in Australia, New Zealand, South America
-- **Research Stations:** Antarctica (Concordia, Halley, Syowa, Zhongshan), Greenland Summit Camp
-- **Mountain Observatories:** Wendelstein, Jungfraujoch, Sphinx, Teide, Roque de los Muchachos
-- **Island Observatories:** Haleakala, Tenerife, La Réunion, Madeira, Azores
-- **Radio Sky Monitoring:** GRAVES radar (France), BRAMS (Belgium)
-
-### Total: 246 Sky Observation Sources
-
-Each scraper automatically attempts to download the latest image from these sources, processes them through astronomical image analysis, and stores the results with metadata and timestamps. The system is designed to be robust, with error handling and retry logic to handle network issues and unavailable sources.
+1.  **Barnard Astronomical Society:** A static URL pointing to the latest all-sky camera image.
+2.  **weatherUSA SkyCam Network:** Scrapes specific camera pages to find the latest image URL.
 
 ## How to Run Manually
 
