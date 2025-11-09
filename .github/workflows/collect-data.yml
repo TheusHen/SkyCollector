@@ -35,6 +35,14 @@ jobs:
       env:
         PYTHONPATH: '.'
 
+    - name: Upload logs as artifacts
+      if: always()
+      uses: actions/upload-artifact@v3
+      with:
+        name: collection-logs
+        path: logs/
+        retention-days: 30
+
     - name: Commit and push new data
       run: |
         git config --global user.name 'github-actions[bot]'
