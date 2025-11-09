@@ -37,7 +37,7 @@ function analyze_image(image_path)
     # Calculate moon phase
     println(stderr, "[Julia] Calculating moon phase...")
     jd = jdcnv(now())
-    moon_phase_val = moonph(jd)
+    moon_phase_val = mphase(jd)
     moon_phase_str = moon_phase_string(moon_phase_val)
     println(stderr, "[Julia] Moon phase: ", moon_phase_str, " (", round(moon_phase_val, digits=4), ")")
 
