@@ -1,6 +1,8 @@
 using JSON
 using Images
 using BlobTracking
+using AstroLib
+using Dates
 
 function analyze_image(image_path)
     # Load the image
@@ -23,15 +25,37 @@ function analyze_image(image_path)
         ))
     end
 
-    # Mock moon phase for now, as it's a more complex analysis
-    moon_phase = "Waning Gibbous (mocked)"
+    # Calculate moon phase
+    jd = jdcnv(now())
+    moon_phase_val = moonph(jd)
+    moon_phase_str = moon_phase_string(moon_phase_val)
 
     analysis_data = Dict(
         "stars" => stars,
-        "moon_phase" => moon_phase
+        "moon_phase" => moon_phase_str
     )
 
     return JSON.json(analysis_data)
+end
+
+function moon_phase_string(phase_val)
+    if phase_val < 0.0625 || phase_val >= 0.9375
+        return "New Moon"
+    elseif phase_val < 0.1875
+        return "Waxing Crescent"
+    elseif phase_val < 0.3125
+        return "First Quarter"
+    elseif phase_val < 0.4375
+        return "Waxing Gibbous"
+    elseif phase_val < 0.5625
+        return "Full Moon"
+    elseif phase_val < 0.6875
+        return "Waning Gibbous"
+    elseif phase_val < 0.8125
+        return "Last Quarter"
+    else
+        return "Waning Crescent"
+    end
 end
 
 function main()

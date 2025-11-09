@@ -28,12 +28,10 @@ jobs:
 
     - name: Install Julia dependencies
       run: |
-        julia -e 'using Pkg; Pk.add("JSON"); Pkg.add("Images"); Pkg.add("BlobTracking")'
+        julia -e 'using Pkg; Pkg.add("JSON"); Pkg.add("Images"); Pkg.add("BlobTracking"); Pkg.add("AstroLib")'
 
     - name: Run data collection script
       run: python src/python/main.py
-      env:
-        NASA_API_KEY: ${{ secrets.NASA_API_KEY }}
 
     - name: Commit and push new data
       run: |
