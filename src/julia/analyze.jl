@@ -5,15 +5,23 @@ using AstroLib
 using Dates
 
 function analyze_image(image_path)
+    println(stderr, "[Julia] Loading image from: ", image_path)
+    
     # Load the image
     img = load(image_path)
+    println(stderr, "[Julia] Image loaded successfully, size: ", size(img))
 
     # Convert to grayscale
     img_gray = Gray.(img)
+    println(stderr, "[Julia] Converted to grayscale")
 
     # Detect blobs (stars)
-    # The function signature was updated in the library. We now use a keyword argument for the threshold.
-    blobs = blob_LoG(img_gray, rthresh=0.1)
+    # blob_LoG requires σscales as second parameter (scale range for detection)
+    # Using a range of scales from 1 to 10 pixels for star detection
+    println(stderr, "[Julia] Starting blob detection...")
+    σscales = 1:10
+    blobs = blob_LoG(img_gray, σscales, rthresh=0.1)
+    println(stderr, "[Julia] Detected ", length(blobs), " blobs (stars)")
 
     # Format the star data
     stars = []
@@ -27,15 +35,18 @@ function analyze_image(image_path)
     end
 
     # Calculate moon phase
+    println(stderr, "[Julia] Calculating moon phase...")
     jd = jdcnv(now())
     moon_phase_val = moonph(jd)
     moon_phase_str = moon_phase_string(moon_phase_val)
+    println(stderr, "[Julia] Moon phase: ", moon_phase_str, " (", round(moon_phase_val, digits=4), ")")
 
     analysis_data = Dict(
         "stars" => stars,
         "moon_phase" => moon_phase_str
     )
 
+    println(stderr, "[Julia] Analysis complete")
     return JSON.json(analysis_data)
 end
 
