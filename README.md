@@ -28,9 +28,9 @@ Currently, the project scrapes images from the following sources:
     - Install Julia packages: `julia -e 'using Pkg; Pkg.add("JSON"); Pkg.add("Images"); Pkg.add("BlobTracking"); Pkg.add("AstroLib")'`
 
 2.  **Run the Script:**
-    - Execute the main orchestrator from the root of the project:
+    - Execute the main orchestrator from the root of the project. You need to set the `PYTHONPATH` to include the project root so that the scrapers can be found.
       ```bash
-      python src/python/main.py
+      PYTHONPATH=. python src/python/main.py
       ```
 
 ## Automation via GitHub Actions
