@@ -52,6 +52,19 @@ def analyze_image(image_path):
     logger.info(f"Invoking Julia script: {julia_script_path}")
     logger.info(f"Analyzing image: {image_path}")
     
+    # Define warning patterns to suppress (known harmless warnings from Julia packages)
+    suppress_patterns = [
+        "WARNING: Method definition iterate",
+        "ERROR: Method overwriting is not permitted during Module precompilation",
+        "Warning: Circular dependency detected",
+        "Warning: Module IntervalSetsRandomExt",
+        "Error: Error during loading of extension IntervalSetsRandomExt",
+        "WARNING: using libffmpeg",
+        "Declaring __precompile__(false) is not allowed",
+        "Precompilation will be skipped",
+        "Precompilation will also be skipped"
+    ]
+    
     try:
         result = subprocess.run(
             ["julia", julia_script_path, image_path], 
@@ -61,10 +74,14 @@ def analyze_image(image_path):
         )
         
         # Log Julia stderr output (which contains our logging messages)
+        # Filter out known harmless warnings from package loading
         if result.stderr:
             for line in result.stderr.strip().split('\n'):
                 if line:
-                    logger.info(f"Julia: {line}")
+                    # Check if this line should be suppressed
+                    should_suppress = any(pattern in line for pattern in suppress_patterns)
+                    if not should_suppress:
+                        logger.info(f"Julia: {line}")
 
         if result.returncode != 0:
             logger.error(f"Julia script failed with return code {result.returncode}")
