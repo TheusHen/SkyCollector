@@ -40,7 +40,7 @@ Currently, the project scrapes images from the following sources:
 
 1.  **Install Dependencies:**
     - Python 3.10+
-    - Julia 1.6+
+    - Julia 1.10+ (LTS version recommended)
     - Install Python packages: `pip install -r src/python/requirements.txt`
     - Install Julia packages: `julia -e 'using Pkg; Pkg.add("JSON"); Pkg.add("Images"); Pkg.add("BlobTracking"); Pkg.add("AstroLib")'`
 
