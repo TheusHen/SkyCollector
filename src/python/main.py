@@ -54,7 +54,7 @@ def analyze_image(image_path):
     
     try:
         result = subprocess.run(
-            ["julia", julia_script_path, image_path], 
+            ["julia", "--compiled-modules=no", julia_script_path, image_path], 
             capture_output=True, 
             text=True,
             timeout=60  # 60 second timeout
