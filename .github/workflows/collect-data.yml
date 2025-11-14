@@ -32,9 +32,16 @@ jobs:
       with:
         version: '1.10'
 
-    - name: Install Julia dependencies
-      run: |
-        julia -e 'using Pkg; Pkg.add("JSON"); Pkg.add("Images"); Pkg.add("BlobTracking"); Pkg.add("AstroLib")'
+    - name: Cache Julia packages
+      uses: actions/cache@v3
+      with:
+        path: ~/.julia
+        key: ${{ runner.os }}-julia-${{ hashFiles('setup_julia.jl') }}
+        restore-keys: |
+          ${{ runner.os }}-julia-
+
+    - name: Install and precompile Julia dependencies
+      run: julia setup_julia.jl
 
     - name: Run data collection script
       run: python src/python/main.py

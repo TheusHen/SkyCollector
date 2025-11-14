@@ -42,7 +42,10 @@ Currently, the project scrapes images from the following sources:
     - Python 3.10+
     - Julia 1.10+ (LTS version recommended)
     - Install Python packages: `pip install -r src/python/requirements.txt`
-    - Install Julia packages: `julia -e 'using Pkg; Pkg.add("JSON"); Pkg.add("Images"); Pkg.add("BlobTracking"); Pkg.add("AstroLib")'`
+    - Install and precompile Julia packages: `julia setup_julia.jl`
+      - This script installs JSON, Images, BlobTracking, and AstroLib packages
+      - It also precompiles them to avoid timeouts during analysis
+      - **Note:** First-time setup may take several minutes to download and compile packages
 
 2.  **Run the Script:**
     - Execute the main orchestrator from the root of the project. You need to set the `PYTHONPATH` to include the project root so that the scrapers can be found.
@@ -64,6 +67,12 @@ When running via GitHub Actions:
 ## Troubleshooting
 
 ### Common Issues
+
+**Julia Script Timeouts**: If the Julia script times out after 60 seconds:
+- Ensure Julia packages are properly installed and precompiled: `julia setup_julia.jl`
+- The packages need to be precompiled once before first use
+- If packages are not precompiled, Julia will recompile them on every run, causing timeouts
+- After running `setup_julia.jl`, subsequent runs should complete quickly (typically under 10 seconds)
 
 **Julia MethodError with blob_LoG**: Ensure you're using the correct function signature with the scale parameter:
 ```julia
